@@ -29,5 +29,14 @@ app.get("/", (_req:Request, res:Response) => {
     })
 });
 
+// For all other routes, return a 404
+app.get("*", (_req: Request, res: Response) => {
+    res.status(404).json({
+        statusCode: 404,
+        error: "Not Found",
+        message: "The requested resource could not be found but may be available again in the future. Subsequent requests by the client are permissible."
+    })
+})
+
 // Start Server
 app.listen(port, () => console.log(`Server started in ${env} mode on port ${port}`));
