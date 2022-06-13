@@ -22,4 +22,4 @@ app.use(express.urlencoded({
 app.use(express.json());
 
 // Start Server
-app.listen(8080, () => console.log("Server started on port 8080"));
+app.listen(port, () => console.log(`Server started in ${env} mode on port ${port}`));
