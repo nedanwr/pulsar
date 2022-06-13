@@ -1,7 +1,11 @@
 import { Request, Response } from "express";
 import Joi, { ValidationResult } from "joi";
+import { PrismaClient } from "@prisma/client";
+import { hashPassword } from "../../lib/auth";
 
-export const createUser = async (req:Request, res:Response) => {
+const prisma:PrismaClient = new PrismaClient();
+
+export const createUser = async (req: Request, res: Response) => {
     // Validate the request body
     const schema = Joi.object({
        email: Joi.string()
@@ -19,7 +23,7 @@ export const createUser = async (req:Request, res:Response) => {
            .required(),
     });
 
-    const result:ValidationResult<unknown> = schema.validate(req.body);
+    const result: ValidationResult<unknown> = schema.validate(req.body);
 
     // If the request body is invalid, return a 400 error
     if (result.error) {
@@ -29,4 +33,25 @@ export const createUser = async (req:Request, res:Response) => {
             message: result.error.details[0].message,
         });
     }
+
+    // Create a new user
+    await prisma.user.create({
+        data: {
+            email: req.body.email,
+            username: req.body.username,
+            discriminator: 1,
+            password: await hashPassword(req.body.password),
+            createdAt: new Date().getTime(),
+        }
+    })
+        .catch((error) => {
+            throw error;
+        })
+        .finally(async () => {
+            await prisma.$disconnect();
+            return res.status(201).json({
+                statusCode: 201,
+                message: "User created successfully",
+            });
+        })
 }
