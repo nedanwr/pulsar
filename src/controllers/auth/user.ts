@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Joi, { ValidationResult } from "joi";
 import { PrismaClient } from "@prisma/client";
+import { generateDiscriminator } from "../../lib/user";
 import { hashPassword } from "../../lib/auth";
 
 const prisma:PrismaClient = new PrismaClient();
@@ -39,7 +40,7 @@ export const createUser = async (req: Request, res: Response) => {
         data: {
             email: req.body.email,
             username: req.body.username,
-            discriminator: 1,
+            discriminator: generateDiscriminator(),
             password: await hashPassword(req.body.password),
             createdAt: new Date().getTime(),
         }
