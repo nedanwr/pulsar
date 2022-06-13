@@ -4,6 +4,13 @@
   "private": false,
   "description": "A test-only, discord-like chat application api",
   "main": "build/app.js",
+  "scripts": {
+    "clean": "rm -rf build && rm -rf node_modules",
+    "start": "cross-env NODE_ENV=production node dist/app.js",
+    "dev": "cross-env NODE_ENV=development nodemon src/app.ts",
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint src/**/*.ts"
+  },
   "repository": "git+https://github.com/nedanwr/pulsar.git",
   "keywords": [
     "nodejs",
