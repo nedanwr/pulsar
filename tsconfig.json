@@ -1,4 +1,7 @@
 {
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
   "compilerOptions": {
     "target": "esnext",
     "lib": ["esnext"],
@@ -22,10 +25,10 @@
     "skipLibCheck": true
   },
   "include": [
-    "src/**/*.ts",
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules",
-    "build",
+    "build"
   ]
 }
