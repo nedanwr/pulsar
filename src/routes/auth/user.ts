@@ -1,7 +1,7 @@
 import { Router } from "express";
-const router:Router = Router();
+const router: Router = Router();
 
-// Import Controllers
+// Import Controller
 import { createUser } from "@controllers/auth/user";
 
 // @desc        Create User
