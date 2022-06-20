@@ -2,7 +2,7 @@ import { Router } from "express";
 const router:Router = Router();
 
 // Import Routes
-import registerRoute from "./auth/user";
+import registerRoute from "@routes/auth/user";
 
 // Use Routes
 router.use("/auth/user", registerRoute);
