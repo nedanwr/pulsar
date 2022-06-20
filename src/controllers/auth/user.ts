@@ -3,6 +3,7 @@ import Joi, { ValidationResult } from "joi";
 import { PrismaClient } from "@prisma/client";
 import { generateDiscriminator } from "../../lib/user";
 import { hashPassword, comparePassword } from "../../lib/auth";
+import { generateAccessToken } from "../../lib/user";
 
 const prisma:PrismaClient = new PrismaClient();
 
@@ -106,4 +107,11 @@ export const loginUser = async (req: Request, res:Response) => {
             message: "Invalid password",
         });
     }
+
+    // If the password is correct, return a 200 response
+    return res.status(200).json({
+        statusCode: 200,
+        message: "User logged in successfully",
+        accessToken: await generateAccessToken(userExists.id),
+    });
 }
