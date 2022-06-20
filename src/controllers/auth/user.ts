@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
 import Joi, { ValidationResult } from "joi";
 import { PrismaClient } from "@prisma/client";
-import { generateDiscriminator } from "../../lib/user";
-import { hashPassword, comparePassword } from "../../lib/auth";
-import { generateAccessToken } from "../../lib/user";
+import { generateDiscriminator, generateAccessToken } from "@lib/user";
+import { hashPassword, comparePassword } from "@lib/auth";
 
 const prisma:PrismaClient = new PrismaClient();
 
