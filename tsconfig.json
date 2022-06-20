@@ -4,7 +4,7 @@
     "lib": ["esnext"],
     "jsx": "preserve",
     "module": "commonjs",
-    "rootDir": "src",
+    "baseUrl": ".",
     "moduleResolution": "node",
     "outDir": "build",
     "removeComments": true,
