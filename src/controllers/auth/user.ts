@@ -56,3 +56,26 @@ export const createUser = async (req: Request, res: Response) => {
             });
         })
 }
+
+export const loginUser = async (req: Request, res:Response) => {
+    // Validate the request body
+    const schema = Joi.object({
+        email: Joi.string()
+            .email()
+            .required(),
+
+        password: Joi.string()
+            .required(),
+    });
+
+    const result: ValidationResult<unknown> = schema.validate(req.body);
+
+    // If the request body is invalid, return a 400 error
+    if (result.error) {
+        return res.status(400).json({
+            statusCode: 400,
+            error: "Bad Request",
+            message: result.error.details[0].message,
+        });
+    }
+}
