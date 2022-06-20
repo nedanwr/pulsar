@@ -4,7 +4,7 @@ import {
     __prod__,
     port,
     env
-} from "./lib/constants";
+} from "@lib/constants";
 
 // Init Express
 const app: Application = express();
