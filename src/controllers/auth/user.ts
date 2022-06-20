@@ -78,4 +78,20 @@ export const loginUser = async (req: Request, res:Response) => {
             message: result.error.details[0].message,
         });
     }
+
+    // Check if the user exists
+    const userExists = await prisma.user.findFirst({
+        where: {
+            email: req.body.email,
+        }
+    });
+
+    // If the user doesn't exist, return a 404 error
+    if (!userExists) {
+        return res.status(404).json({
+            statusCode: 404,
+            error: "Not Found",
+            message: `User with email "${req.body.email}" not found`,
+        });
+    }
 }
