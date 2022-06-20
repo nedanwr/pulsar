@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import Joi, { ValidationResult } from "joi";
 import { PrismaClient } from "@prisma/client";
 import { generateDiscriminator } from "../../lib/user";
-import { hashPassword } from "../../lib/auth";
+import { hashPassword, comparePassword } from "../../lib/auth";
 
 const prisma:PrismaClient = new PrismaClient();
 
@@ -92,6 +92,18 @@ export const loginUser = async (req: Request, res:Response) => {
             statusCode: 404,
             error: "Not Found",
             message: `User with email "${req.body.email}" not found`,
+        });
+    }
+
+    // Compare the password
+    const isCorrectPassword = await comparePassword(req.body.password, userExists.password);
+
+    // If the password is incorrect, return a 401 error
+    if (!isCorrectPassword) {
+        return res.status(401).json({
+            statusCode: 401,
+            error: "Unauthorized",
+            message: "Invalid password",
         });
     }
 }
