@@ -8,6 +8,9 @@
     "jsx": "preserve",
     "module": "commonjs",
     "baseUrl": ".",
+    "paths": {
+      "@routes/*": ["./src/routes/*"]
+    },
     "moduleResolution": "node",
     "outDir": "build",
     "removeComments": true,
