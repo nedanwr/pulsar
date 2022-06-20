@@ -30,7 +30,7 @@ app.get("/", (_req:Request, res:Response) => {
 });
 
 // Import API Route
-import apiRoute from "./routes/api";
+import apiRoute from "@routes/api";
 app.use("/api/v1", apiRoute);
 
 // For all other routes, return a 404
