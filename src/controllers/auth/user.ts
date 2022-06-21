@@ -1,10 +1,8 @@
 import { Request, Response } from "express";
 import Joi, { ValidationResult } from "joi";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@prisma";
 import { generateDiscriminator, generateAccessToken } from "@lib/user";
 import { hashPassword, comparePassword } from "@lib/auth";
-
-const prisma:PrismaClient = new PrismaClient();
 
 export const createUser = async (req: Request, res: Response) => {
     // Validate the request body
