@@ -2,13 +2,8 @@ import { sign } from "jsonwebtoken";
 import { jwtSecret } from "./constants";
 
 // Generate access token
-export const generateAccessToken = async (uid: string): Promise<void> => {
-    sign({ uid }, jwtSecret, (err: Error | null, token: string | undefined) => {
-        if (err) {
-            throw err;
-        }
-        return token;
-    });
+export const generateAccessToken = async (uid: string) => {
+    return sign({uid}, jwtSecret);
 }
 
 // Generate a random 4 digit number between 1000 and 9999
