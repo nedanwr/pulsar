@@ -9,6 +9,7 @@
     "module": "commonjs",
     "baseUrl": ".",
     "paths": {
+      "@prisma": ["./src/prisma/index.ts"],
       "@routes/*": ["./src/routes/*"],
       "@lib/*": ["./src/lib/*"],
       "@controllers/*": ["./src/controllers/*"],
