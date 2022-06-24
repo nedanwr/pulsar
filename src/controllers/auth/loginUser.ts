@@ -4,7 +4,7 @@ import { prisma } from "@prisma";
 import { generateAccessToken } from "@lib/user";
 import { comparePassword } from "@lib/auth";
 
-export const loginUser = async (req: Request, res:Response) => {
+const loginUser = async (req: Request, res:Response) => {
     // Validate the request body
     const schema = Joi.object({
         email: Joi.string()
@@ -61,3 +61,5 @@ export const loginUser = async (req: Request, res:Response) => {
         accessToken: await generateAccessToken(userExists.id),
     });
 }
+
+export default loginUser;
