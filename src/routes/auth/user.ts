@@ -2,7 +2,7 @@ import { Router } from "express";
 const router: Router = Router();
 
 // Import Controller
-import { createUser } from "@controllers/auth/user";
+import { createUser } from "@controllers/auth";
 
 // @desc        Create User
 // @route       POST /api/v1/user
