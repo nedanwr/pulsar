@@ -26,14 +26,27 @@ model User {
 }
 
 model Server {
-  id          String  @id @default(uuid())
+  id          String    @id @default(uuid())
   name        String
   description String?
-  owner       User    @relation(fields: [owner_id], references: [id])
-  owner_id    String
   avatar_url  String?
+  owner       User      @relation(fields: [owner_id], references: [id])
+  owner_id    String
+  channels    Channel[]
   createdAt   Int
   updatedAt   Int?
 
   @@map(name: "servers")
+}
+
+model Channel {
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+  server      Server  @relation(fields: [server_id], references: [id])
+  server_id   String
+  createdAt   Int
+  updatedAt   Int?
+
+  @@map(name: "channels")
 }
