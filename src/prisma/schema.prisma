@@ -33,6 +33,7 @@ model Server {
   owner       User      @relation(fields: [owner_id], references: [id])
   owner_id    String
   channels    Channel[]
+  messages    Message[]
   createdAt   Int
   updatedAt   Int?
 
@@ -55,6 +56,8 @@ model Channel {
 model Message {
    id         String  @id @default(uuid())
    content    String
+   server     Server  @relation(fields: [server_id], references: [id])
+   server_id  String
    channel    Channel @relation(fields: [channel_id], references: [id])
    channel_id String
    author     User    @relation(fields: [author_id], references: [id])
