@@ -27,9 +27,9 @@
     "url": "https://github.com/nedanwr/pulsar/issues"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.118.0",
     "@prisma/client": "^3.15.1",
     "bcryptjs": "^2.4.3",
-    "do-wrapper": "^4.5.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-rate-limit": "^6.4.0",
