@@ -9,7 +9,7 @@
     "start": "cross-env NODE_ENV=production node dist/app.js",
     "dev": "cross-env NODE_ENV=development nodemon src/app.ts",
     "build": "tsc -p tsconfig.json",
-    "lint": "eslint src/**/*.ts"
+    "lint": "eslint src/**/*.ts && yarn prisma format --schema src/prisma/schema.prisma"
   },
   "repository": "git+https://github.com/nedanwr/pulsar.git",
   "keywords": [
@@ -29,6 +29,7 @@
   "dependencies": {
     "@prisma/client": "^3.15.1",
     "bcryptjs": "^2.4.3",
+    "do-wrapper": "^4.5.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-rate-limit": "^6.4.0",
