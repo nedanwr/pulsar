@@ -45,8 +45,22 @@ model Channel {
   description String?
   server      Server  @relation(fields: [server_id], references: [id])
   server_id   String
+  messages    Message[]
   createdAt   Int
   updatedAt   Int?
 
   @@map(name: "channels")
+}
+
+model Message {
+   id         String  @id @default(uuid())
+   content    String
+   channel    Channel @relation(fields: [channel_id], references: [id])
+   channel_id String
+   author     User    @relation(fields: [author_id], references: [id])
+   author_id  String
+   createdAt  Int
+   updatedAt  Int?
+
+   @@map (name: "messages")
 }
