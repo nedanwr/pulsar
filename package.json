@@ -2,7 +2,7 @@
   "name": "@pulsar/app",
   "version": "1.0.0",
   "private": false,
-  "description": "A test-only, discord-like chat application api",
+  "description": "An api-only, discord-like chat application",
   "main": "build/app.js",
   "scripts": {
     "clean": "rm -rf build && rm -rf node_modules",
