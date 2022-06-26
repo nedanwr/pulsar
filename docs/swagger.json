@@ -1,0 +1,122 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Pulsar API",
+    "description": "An api-only, discord-like, and open-source chat application.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/auth/user": {
+      "post": {
+        "summary": "Create a new user",
+        "description": "Create a new Pulsar user",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "The preferred username of the user",
+                    "example": "Ray"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "The email address of the user",
+                    "example": "ray@goodfellas.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "The preferred password of the user",
+                    "minimum": 8,
+                    "maximum": 256
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully"
+          },
+          "400": {
+            "description": "Error in request body"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/auth": {
+      "post": {
+        "summary": "Login",
+        "description": "Log in to Pulsar",
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "description": "The email address of the user",
+                    "example": "ray@goodfellas.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "The password used by the user while creating their account"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "default": "User logged in successfully"
+                    },
+                    "accessToken": {
+                      "type": "string",
+                      "description": "Returns a JWT Token"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in request body"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "401": {
+            "description": "Invalid password"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    }
+  }
+}
