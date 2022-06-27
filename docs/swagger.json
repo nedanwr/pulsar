@@ -52,6 +52,39 @@
             "example": -474595200
           }
         }
+      },
+      "Server": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The server's id.",
+            "format": "uuid",
+            "example": "901de2f7-99fd-496f-bbab-6026d7a576aa"
+          },
+          "name": {
+            "type": "string",
+            "description": "The server's name.",
+            "example": "The Real Goodfellas"
+          },
+          "description": {
+            "type": "string",
+            "description": "The server's description.",
+            "example": "Server for the original cast of Goodfellas"
+          },
+          "createdAt": {
+            "type": "number",
+            "description": "The unix timestamp of when this server was created.",
+            "format": "unix",
+            "example": 653702400
+          },
+          "updatedAt": {
+            "type": "number",
+            "description": "The unix timestamp of when this server was last updated.",
+            "format": "unix",
+            "default": null
+          }
+        }
       }
     }
   },
