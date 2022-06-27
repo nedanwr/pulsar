@@ -39,15 +39,18 @@ const modifyCurrentUser = async (req: Request, res:Response) => {
             updatedAt: new Date().getTime(),
         }
     })
+        .then((user) => {
+            return res.status(200).json({
+                statusCode: 200,
+                message: "User updated successfully",
+                user,
+            });
+        })
         .catch((error: Error | null) => {
             throw error;
         })
         .finally(async () => {
             await prisma.$disconnect();
-            return res.status(200).json({
-                statusCode: 200,
-                message: "User updated successfully",
-            });
         })
 }
 
