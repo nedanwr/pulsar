@@ -388,6 +388,59 @@
             }
           }
         }
+      },
+      "patch": {
+        "summary": "Modify Server",
+        "description": "Modify a server's settings. Must be the owner. Returns the updated guild object on success.",
+        "tags": ["Server"],
+        "security": [{
+          "bearerAuth": []
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "All properties to this endpoint are optional",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The new name of the server",
+                    "example": "Goodfellas"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The new description of the server",
+                    "example": "The Real Goodfellas"
+                  },
+                  "owner_id": {
+                    "type": "string",
+                    "description": "User ID to transfer server ownership to (must be the owner)",
+                    "example": "c5fd2691-e6d1-4da0-a6fa-b887ad48a41b\n\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns updated guild object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Server"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in request body"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
       }
     }
   }
