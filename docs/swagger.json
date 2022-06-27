@@ -441,6 +441,42 @@
             "description": "Unexpected error"
           }
         }
+      },
+      "delete": {
+        "summary": "Delete Server",
+        "description": "Delete a server permanently. User must be the owner. Returns `204 No Content` on success.",
+        "tags": ["Server"],
+        "security": [{
+          "bearerAuth": []
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "All properties to this endpoint are optional",
+                "properties": {
+                  "reason": {
+                    "type": "string",
+                    "description": "Reason for deleting the server",
+                    "example": "No use for it anymore"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Server deleted successfully"
+          },
+          "400": {
+            "description": "Error deleting server"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
       }
     }
   }
