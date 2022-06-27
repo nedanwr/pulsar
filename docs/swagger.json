@@ -98,7 +98,7 @@
   "paths": {
     "/auth/user": {
       "post": {
-        "summary": "Create a new user",
+        "summary": "Create User",
         "description": "Create a new Pulsar user",
         "tags": ["Auth"],
         "requestBody": {
