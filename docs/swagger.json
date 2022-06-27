@@ -74,6 +74,11 @@
             "example": "Server for the original cast of Goodfellas",
             "required": false
           },
+          "owner_id": {
+            "type": "string",
+            "description": "ID of the server owner",
+            "example": "e8251c31-361d-4366-98d3-4865799f3652"
+          },
           "createdAt": {
             "type": "number",
             "description": "The unix timestamp of when this server was created.",
