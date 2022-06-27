@@ -121,7 +121,7 @@
     "/user/@me": {
       "get": {
         "summary": "Get Current User",
-        "description": "Get the information of currently logged in user",
+        "description": "Returns a user object of the requester's account",
         "tags": [
           "Users"
         ],
