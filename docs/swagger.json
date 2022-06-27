@@ -353,6 +353,37 @@
           }
         }
       }
+    },
+    "/server/{server.id}": {
+      "get": {
+        "summary": "Get Server",
+        "description": "Returns the guild object for the given id.",
+        "tags": ["Server"],
+        "security": [{
+          "bearerAuth": []
+        }],
+        "parameters": [{
+          "in": "path",
+          "name": "id",
+          "description": "The id of the server",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }],
+        "responses": {
+          "200": {
+            "description": "Retrieves the specified server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Server"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
