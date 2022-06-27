@@ -302,6 +302,57 @@
           }
         }
       }
+    },
+    "/server": {
+      "post": {
+        "summary": "Create Server",
+        "description": "Create a new server. Returns a guild object on success.",
+        "tags": ["Server"],
+        "security": [{
+          "bearerAuth": []
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the server",
+                    "example": "The Real Goodfellas",
+                    "required": true
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "The description of the server",
+                    "example": "Server for the original cast of Goodfellas",
+                    "required": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Server created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Server"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in request body"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
     }
   }
 }
