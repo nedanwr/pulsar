@@ -43,7 +43,7 @@ const createUser = async (req: Request, res: Response) => {
             createdAt: new Date().getTime(),
         }
     })
-        .catch((error) => {
+        .catch((error: Error | null) => {
             throw error;
         })
         .finally(async () => {
