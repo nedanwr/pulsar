@@ -12,6 +12,47 @@
         "scheme": "bearer",
         "bearerFormat": "JWT"
       }
+    },
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The user's id",
+            "format": "uuid",
+            "example": "e8251c31-361d-4366-98d3-4865799f3652"
+          },
+          "username": {
+            "type": "string",
+            "description": "The user's username, not unique",
+            "example": "Ray"
+          },
+          "discriminator": {
+            "type": "string",
+            "description": "The user's 4-digit pulsar-tag",
+            "example": "1954"
+          },
+          "email": {
+            "type": "string",
+            "description": "The user's email",
+            "format": "email",
+            "example": "ray@rayliotta.com"
+          },
+          "verified": {
+            "type": "boolean",
+            "description": "Whether the email on this account has been verified",
+            "format": "boolean",
+            "default": false
+          },
+          "createdAt": {
+            "type": "number",
+            "description": "The unix timestamp of when this user was created",
+            "format": "unix",
+            "example": -474595200
+          }
+        }
+      }
     }
   },
   "paths": {
@@ -137,34 +178,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "description": "The id of the user",
-                      "example": "e8251c31-361d-4366-98d3-4865799f3652"
-                    },
-                    "username": {
-                      "type": "string",
-                      "description": "The preferred username of the user",
-                      "example": "Ray"
-                    },
-                    "discriminator": {
-                      "type": "number",
-                      "description": "The discriminator of the user",
-                      "example": 1954
-                    },
-                    "email": {
-                      "type": "string",
-                      "description": "The email address of the user",
-                      "example": "ray@goodfellas.com"
-                    },
-                    "createdAt": {
-                      "type": "number",
-                      "description": "The unix timestamp of when the user was created",
-                      "example": -474595200
-                    }
-                  }
+                  "$ref": "#/components/schemas/User"
                 }
               }
             }
@@ -192,34 +206,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "description": "The id of the user",
-                      "example": "e8251c31-361d-4366-98d3-4865799f3652"
-                    },
-                    "username": {
-                      "type": "string",
-                      "description": "The preferred username of the user",
-                      "example": "Ray"
-                    },
-                    "discriminator": {
-                      "type": "number",
-                      "description": "The discriminator of the user",
-                      "example": 1954
-                    },
-                    "email": {
-                      "type": "string",
-                      "description": "The email address of the user",
-                      "example": "ray@goodfellas.com"
-                    },
-                    "createdAt": {
-                      "type": "number",
-                      "description": "The unix timestamp of when the user was created",
-                      "example": -474595200
-                    }
-                  }
+                  "$ref": "#/components/schemas/User"
                 }
               }
             }
