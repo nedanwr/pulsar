@@ -140,6 +140,42 @@
             "description": "Unexpected error"
           }
         }
+      },
+      "delete": {
+        "summary": "Delete User",
+        "description": "Marks the current user account for deletion",
+        "tags": ["Auth"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string",
+                    "description": "The password of the user",
+                    "required": true
+                  },
+                  "reason": {
+                    "type": "string",
+                    "description": "The reason for deleting the user"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "User deleted successfully"
+          },
+          "400": {
+            "description": "Error in deleting user"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
       }
     },
     "/auth": {
