@@ -5,14 +5,21 @@
     "description": "An api-only, discord-like, and open-source chat application.",
     "version": "1.0.0"
   },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
   "paths": {
     "/auth/user": {
       "post": {
         "summary": "Create a new user",
         "description": "Create a new Pulsar user",
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "requestBody": {
           "required": true,
           "content": {
@@ -58,9 +65,7 @@
       "post": {
         "summary": "Login",
         "description": "Log in to Pulsar",
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "requestBody": {
           "required": true,
           "content": {
@@ -122,9 +127,10 @@
       "get": {
         "summary": "Get Current User",
         "description": "Returns a user object of the requester's account",
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
+        "security": [{
+          "bearerAuth": []
+        }],
         "responses": {
           "200": {
             "description": "OK",
@@ -177,6 +183,9 @@
         "summary": "Get User",
         "description": "Returns the user object for a given user ID",
         "tags": ["Users"],
+        "security": [{
+          "bearerAuth": []
+        }],
         "responses": {
           "200": {
             "description": "OK",
