@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Joi, { ObjectSchema, ValidationResult } from "joi";
 import { prisma } from "@prisma";
+import { User } from "@prisma/client";
 import { decodeToken } from "../../utils/decodeToken";
 
 // Here we will not be adding a check to see if the current user exists in the database as verifyToken will do that for us.
@@ -39,7 +40,7 @@ const modifyCurrentUser = async (req: Request, res:Response) => {
             updatedAt: new Date().getTime(),
         }
     })
-        .then((user) => {
+        .then((user: User) => {
             return res.status(200).json({
                 statusCode: 200,
                 message: "User updated successfully",
