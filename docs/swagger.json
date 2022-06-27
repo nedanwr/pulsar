@@ -65,12 +65,14 @@
           "name": {
             "type": "string",
             "description": "The server's name.",
-            "example": "The Real Goodfellas"
+            "example": "The Real Goodfellas",
+            "required": true
           },
           "description": {
             "type": "string",
             "description": "The server's description.",
-            "example": "Server for the original cast of Goodfellas"
+            "example": "Server for the original cast of Goodfellas",
+            "required": false
           },
           "createdAt": {
             "type": "number",
