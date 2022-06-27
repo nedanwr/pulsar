@@ -233,6 +233,28 @@
         "security": [{
           "bearerAuth": []
         }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "description": "One of the two properties are required, otherwise a 400 status is returned.",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "The preferred username of the user",
+                    "example": "Ray Liotta"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "The email address of the user",
+                    "example": "liotta@rayliotta.com"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK",
