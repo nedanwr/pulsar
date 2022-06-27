@@ -15,11 +15,12 @@ model User {
   id            String   @id @default(uuid())
   email         String   @unique
   username      String
-  discriminator Int
+  discriminator String
   avatar_url    String?
   password      String
   servers       Server[]
   messages      Message[]
+  verified      Boolean  @default(false)
   createdAt     Int
   updatedAt     Int?
 
