@@ -190,6 +190,32 @@
             "description": "Unexpected error"
           }
         }
+      },
+      "patch": {
+        "summary": "Modify Current User",
+        "description": "Modify the requester's user account settings. Returns a user object on success.",
+        "tags": ["Users"],
+        "security": [{
+          "bearerAuth": []
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in request body"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
       }
     },
     "/user/{user.id}": {
