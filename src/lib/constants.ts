@@ -8,7 +8,10 @@ export const rateLimitDuration: number = parseInt(process.env.RATE_LIMIT_DURATIO
 // JWT
 export const jwtSecret: string = process.env.JWT_SECRET || "";
 
-// S3
-export const s3Endpoint: string = process.env.S3_ENDPOINT || "";
-export const s3AccessKeyId: string = process.env.S3_ACCESS_KEY_ID || "";
-export const s3SecretAccessKey: string = process.env.S3_SECRET_ACCESS_KEY || "";
+// Firebase
+export const firebaseAPIKey: string = process.env.FIREBASE_API_KEY!;
+export const firebaseAuthDomain: string = process.env.FIREBASE_AUTH_DOMAIN!;
+export const firebaseProjectID: string = process.env.FIREBASE_PROJECT_ID!;
+export const firebaseStorageBucket: string = process.env.FIREBASE_STORAGE_BUCKET!;
+export const firebaseMessagingSenderID: string = process.env.FIREBASE_MESSAGING_SENDER_ID!;
+export const firebaseAppID: string = process.env.FIREBASE_APP_ID!;
