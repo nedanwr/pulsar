@@ -7,13 +7,13 @@ import { hashPassword } from "@lib/auth";
 const createUser = async (req: Request, res: Response) => {
     // Validate the request body
     const schema = Joi.object({
-        email: Joi.string()
-            .email()
-            .required(),
-
         username: Joi.string()
             .min(3)
             .max(16)
+            .required(),
+
+        email: Joi.string()
+            .email()
             .required(),
 
         password: Joi.string()
