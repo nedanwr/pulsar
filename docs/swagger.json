@@ -39,6 +39,10 @@
             "format": "email",
             "example": "ray@rayliotta.com"
           },
+          "avatar_url": {
+            "type": "string",
+            "description": "The user's avatar url"
+          },
           "verified": {
             "type": "boolean",
             "description": "Whether the email on this account has been verified",
@@ -78,6 +82,10 @@
             "type": "string",
             "description": "ID of the server owner",
             "example": "e8251c31-361d-4366-98d3-4865799f3652"
+          },
+          "icon_url": {
+            "type": "string",
+            "description": "The server's icon url"
           },
           "createdAt": {
             "type": "number",
