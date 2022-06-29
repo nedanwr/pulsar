@@ -3,8 +3,8 @@ import Joi, { ObjectSchema, ValidationResult } from "joi";
 import { prisma } from "@prisma";
 import { User } from "@prisma/client";
 import { decodeToken } from "@utils/decodeToken";
-// import { upload } from "@utils/initMulter";
-// import { uploadImage } from "../../firebase/uploadImage";
+import { upload } from "@utils/initMulter";
+import { uploadImage } from "../../firebase/uploadImage";
 
 // Here we will not be adding a check to see if the current user exists in the database as verifyToken will do that for us.
 const modifyCurrentUser = async (req: Request, res:Response) => {
@@ -82,6 +82,14 @@ const modifyCurrentUser = async (req: Request, res:Response) => {
             .finally(async () => {
                 await prisma.$disconnect();
             });
+    else if (req.is("multipart/form-data"))
+        upload.single("avatar")(req, res, async (error) => {
+            if (error) throw error;
+            await uploadImage("avatars", "test", req.file!)
+                .finally(() => {
+                    res.sendStatus(200);
+                });
+        });
 }
 
 export default modifyCurrentUser;
