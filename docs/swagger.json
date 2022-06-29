@@ -298,6 +298,18 @@
                   }
                 }
               }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "description": "New avatar image of the user. Must be a file of type `image/jpeg`, `image/png`, or `image/gif`. Must be less than `10MB`",
+                "properties": {
+                  "avatar": {
+                    "type": "object",
+                    "description": "New avatar of the user"
+                  }
+                }
+              }
             }
           }
         },
