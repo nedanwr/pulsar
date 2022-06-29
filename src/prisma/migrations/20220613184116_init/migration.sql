@@ -1,11 +1,12 @@
 -- CreateTable
 CREATE TABLE "users" (
     "id" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
     "username" TEXT NOT NULL,
-    "discriminator" INTEGER NOT NULL,
+    "email" TEXT NOT NULL,
+    "discriminator" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "avatar_url" TEXT,
+    "verified" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" INTEGER NOT NULL,
     "updatedAt" INTEGER,
 
