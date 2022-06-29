@@ -2,7 +2,9 @@ import { Request, Response } from "express";
 import Joi, { ObjectSchema, ValidationResult } from "joi";
 import { prisma } from "@prisma";
 import { User } from "@prisma/client";
-import { decodeToken } from "../../utils/decodeToken";
+import { decodeToken } from "@utils/decodeToken";
+// import { upload } from "@utils/initMulter";
+// import { uploadImage } from "../../firebase/uploadImage";
 
 // Here we will not be adding a check to see if the current user exists in the database as verifyToken will do that for us.
 const modifyCurrentUser = async (req: Request, res:Response) => {
@@ -18,6 +20,8 @@ const modifyCurrentUser = async (req: Request, res:Response) => {
         confirmEmail: Joi.string()
             .email()
             .valid(Joi.ref("email")),
+
+        avatar: Joi.optional(),
     });
 
     const result: ValidationResult<any> = schema.validate(req.body);
@@ -31,32 +35,53 @@ const modifyCurrentUser = async (req: Request, res:Response) => {
         });
 
     // Decode the token
-    const token: any = decodeToken(req);
+    const token: any = await decodeToken(req);
 
     // Update the user
-    await prisma.user.update({
-        where: {
-            id: token.uid,
-        },
-        data: {
-            username: req.body.username,
-            email: req.body.email,
-            updatedAt: new Date().getTime(),
-        }
-    })
-        .then((user: User) => {
-            return res.status(200).json({
-                statusCode: 200,
-                message: "User updated successfully",
-                user,
+    if (req.body.username)
+        await prisma.user.update({
+            where: {
+                id: token.uid,
+            },
+            data: {
+                username: req.body.username,
+            }
+        })
+            .then((user: User) => {
+                return res.status(200).json({
+                    statusCode: 200,
+                    message: "Username updated successfully",
+                    user,
+                });
+            })
+            .catch((error: Error | null) => {
+                throw error;
+            })
+            .finally(async () => {
+                await prisma.$disconnect();
             });
+    else if (req.body.email)
+        await prisma.user.update({
+            where: {
+                id: token.uid,
+            },
+            data: {
+                email: req.body.email,
+            }
         })
-        .catch((error: Error | null) => {
-            throw error;
-        })
-        .finally(async () => {
-            await prisma.$disconnect();
-        })
+            .then((user: User) => {
+                return res.status(200).json({
+                    statusCode: 200,
+                    message: "Email updated successfully",
+                    user,
+                });
+            })
+            .catch((error: Error | null) => {
+                throw error;
+            })
+            .finally(async () => {
+                await prisma.$disconnect();
+            });
 }
 
 export default modifyCurrentUser;
