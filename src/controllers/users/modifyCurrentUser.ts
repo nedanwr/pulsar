@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import Joi, { ObjectSchema, ValidationResult } from "joi";
 import { prisma } from "@prisma";
 import { User } from "@prisma/client";
+import { randomUUID } from "crypto";
+import { getDownloadURL } from "firebase/storage";
 import { decodeToken } from "@utils/decodeToken";
 import { upload } from "@utils/initMulter";
 import { uploadImage } from "../../firebase/uploadImage";
@@ -84,10 +86,32 @@ const modifyCurrentUser = async (req: Request, res:Response) => {
             });
     else if (req.is("multipart/form-data"))
         upload.single("avatar")(req, res, async (error) => {
+            // If there was an error uploading, throw error
             if (error) throw error;
-            await uploadImage("avatars", "test", req.file!)
-                .finally(() => {
-                    res.sendStatus(200);
+            // Upload the image to firebase storage
+            await uploadImage("avatars", randomUUID(), req.file!)
+                .then((url) => {
+                    setTimeout(async () => {
+                        // console.log(await getDownloadURL(url));
+                        await prisma.user.update({
+                            where: {
+                                id: token.uid,
+                            },
+                            data: {
+                                avatar_url: await getDownloadURL(url),
+                            }
+                        })
+                            .then(async (user: User) => {
+                                return res.status(200).json({
+                                    statusCode: 200,
+                                    message: "Avatar updated successfully",
+                                    user,
+                                });
+                            });
+                    }, 10000)
+                })
+                .finally(async () => {
+                    await prisma.$disconnect();
                 });
         });
 }
