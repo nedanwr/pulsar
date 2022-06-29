@@ -344,6 +344,37 @@
         }
       }
     },
+    "/users/@me/servers": {
+      "get": {
+        "summary": "Get Current User Servers",
+        "description": "Returns a list of partial server objects the current user is a member of.",
+        "tags": ["Users"],
+        "security": [{
+          "bearerAuth": []
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": [{
+                    "$ref": "#/components/schemas/Server"
+                  }]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in fetching servers"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
     "/server": {
       "post": {
         "summary": "Create Server",
