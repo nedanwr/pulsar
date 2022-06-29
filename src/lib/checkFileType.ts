@@ -1,6 +1,6 @@
 import { extname } from "path";
 
-export const checkFileType = (file: Express.Multer.File, callback: any): Promise<boolean> => {
+export const checkFileType = (file: Express.Multer.File, callback: any): boolean => {
     // Allowed ext
     const fileTypes: RegExp = /jpeg|jpg|png|gif/;
     // Check ext
