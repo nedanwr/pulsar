@@ -14,6 +14,10 @@ const modifyCurrentUser = async (req: Request, res:Response) => {
 
         email: Joi.string()
             .email(),
+
+        confirmEmail: Joi.string()
+            .email()
+            .valid(Joi.ref("email")),
     });
 
     const result: ValidationResult<any> = schema.validate(req.body);
