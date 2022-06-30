@@ -2,11 +2,11 @@ import { Request, Response } from "express";
 import Joi, { ObjectSchema, ValidationResult } from "joi";
 import { prisma } from "@prisma";
 import { Server } from "@prisma/client";
-// import { randomUUID } from "crypto";
+import { randomUUID } from "crypto";
 import { validateUUID } from "@utils/validateUUID";
-// import { upload } from "@utils/initMulter";
-// import { uploadImage } from "@firebase/uploadImage";
-// import { getDownloadURL } from "firebase/storage";
+import { upload } from "@utils/initMulter";
+import { uploadImage } from "@firebase/uploadImage";
+import { getDownloadURL } from "firebase/storage";
 
 const modifyServer = async (req: Request, res: Response) => {
     // Pass id param to variable
@@ -93,6 +93,39 @@ const modifyServer = async (req: Request, res: Response) => {
             .finally(async () => {
                 await prisma.$disconnect();
             });
+    // Update/Upload server icon
+    else if (req.is("multipart/form-data"))
+        // Upload image to memory
+        upload.single("icon")(req, res, (error) => {
+            // If error, throw error
+            if (error) throw error;
+            // Upload image to firebase storage
+            uploadImage("server_icons", randomUUID(), req.file!)
+                .then(async (url) => {
+                    setTimeout(async () => {
+                        await prisma.server.update({
+                            where: {
+                                id: serverId,
+                            },
+                            data: {
+                                icon_url: String(await getDownloadURL(url)).split("?")[0],
+                            }
+                        })
+                            .then((server: Server | null) => {
+                                return res.status(200)
+                                    .json({
+                                        statusCode: 200,
+                                        message: "Update server icon",
+                                        server,
+                                    })
+                            })
+                            .finally(async () => {
+                                await prisma.$disconnect();
+                            })
+                    }, 15000)
+                });
+        })
+
 }
 
 export default modifyServer;
