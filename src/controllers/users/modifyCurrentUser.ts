@@ -6,9 +6,12 @@ import { randomUUID } from "crypto";
 import { getDownloadURL } from "firebase/storage";
 import { decodeToken } from "@utils/decodeToken";
 import { upload } from "@utils/initMulter";
-import { uploadImage } from "../../firebase/uploadImage";
+import { uploadImage } from "@firebase/uploadImage";
 
-// Here we will not be adding a check to see if the current user exists in the database as verifyToken will do that for us.
+/**
+ * Here we will not be adding a check to see if the current user exists
+ * in the database as verifyToken will do that for us.
+ */
 const modifyCurrentUser = async (req: Request, res:Response) => {
     // Validate the request body
     const schema: ObjectSchema<any> = Joi.object({
