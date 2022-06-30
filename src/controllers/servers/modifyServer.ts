@@ -53,6 +53,29 @@ const modifyServer = async (req: Request, res: Response) => {
                     error: "Bad Request",
                     message: result.error?.details[0].message,
                 });
+
+        // Update the username
+        if (req.body.username)
+            await prisma.server.update({
+                where: {
+                    id: serverId,
+                },
+                data: {
+                    name: req.body.name,
+                }
+            })
+                .finally(async () => {
+                    await prisma.$disconnect();
+                });
+        else if (req.body.description)
+            await prisma.server.update({
+                where: {
+                    id: serverId,
+                },
+                data: {
+                    description: req.body.description,
+                }
+            });
     });
 }
 
