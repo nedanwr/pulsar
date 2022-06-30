@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Joi, { ValidationResult } from "joi";
 import { prisma } from "@prisma";
-import { decodeToken } from "../../utils/decodeToken";
+import { decodeToken } from "@utils/decodeToken";
 
 const createServer = async (req: Request, res: Response) => {
     // Validate the request body
@@ -11,7 +11,7 @@ const createServer = async (req: Request, res: Response) => {
 
         description: Joi.string(),
 
-        avatar_url: Joi.string(),
+        icon: Joi.string().optional(),
     });
 
     const result: ValidationResult<unknown> = schema.validate(req.body);
