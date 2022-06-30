@@ -4,7 +4,7 @@ CREATE TABLE "servers" (
     "name" TEXT NOT NULL,
     "description" TEXT,
     "owner_id" TEXT NOT NULL,
-    "avatar_url" TEXT,
+    "icon_url" TEXT,
     "createdAt" INTEGER NOT NULL,
     "updatedAt" INTEGER,
 
