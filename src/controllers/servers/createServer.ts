@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import Joi, { ValidationResult } from "joi";
+import Joi, { ObjectSchema, ValidationResult } from "joi";
 import { prisma } from "@prisma";
 import { decodeToken } from "@utils/decodeToken";
 
 const createServer = async (req: Request, res: Response) => {
     // Validate the request body
-    const schema = Joi.object({
+    const schema: ObjectSchema<any> = Joi.object({
         name: Joi.string()
             .required(),
 
@@ -23,16 +23,17 @@ const createServer = async (req: Request, res: Response) => {
         return res.status(400).json({
             statusCode: 400,
             error: "Bad Request",
-            message: result.error.details[0].message,
+            message: result.error?.details[0].message,
         });
 
-    // Decode the token
+    // Decode token
     const token: any = await decodeToken(req);
 
     // Create a new server
     await prisma.server.create({
         data: {
             name: req.body.name,
+            description: req.body.description,
             owner_id: token.uid,
             createdAt: new Date().getTime(),
         }
