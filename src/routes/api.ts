@@ -14,7 +14,7 @@ const swaggerOptions: object = {
 import registerRoute from "@routes/auth/user";
 import loginRoute from "@routes/auth";
 import usersRoute from "@routes/users";
-import serverRoute from "@routes/server";
+import serversRoute from "@routes/servers";
 
 // Use Routes
 router.use("/docs", swagger.serve);
@@ -22,6 +22,6 @@ router.use("/docs", swagger.setup(JSON.parse(swaggerDocument), swaggerOptions));
 router.use("/auth/user", createUserLimiter, registerRoute);
 router.use("/auth", loginRoute);
 router.use("/users", usersRoute);
-router.use("/server", serverRoute);
+router.use("/servers", serversRoute);
 
 export default router;
