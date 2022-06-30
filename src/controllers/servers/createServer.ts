@@ -9,9 +9,11 @@ const createServer = async (req: Request, res: Response) => {
         name: Joi.string()
             .required(),
 
-        description: Joi.string(),
+        description: Joi.string()
+            .optional(),
 
-        icon: Joi.string().optional(),
+        icon: Joi.string()
+            .optional(),
     });
 
     const result: ValidationResult<unknown> = schema.validate(req.body);
