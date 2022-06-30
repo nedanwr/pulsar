@@ -8,12 +8,13 @@ const createServer = async (req: Request, res: Response) => {
     // Validate the request body
     const schema: ObjectSchema<any> = Joi.object({
         name: Joi.string()
+            .min(5)
+            .max(16)
             .required(),
 
         description: Joi.string()
-            .optional(),
-
-        icon: Joi.string()
+            .min(8)
+            .max(128)
             .optional(),
     });
 
