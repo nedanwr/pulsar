@@ -15,7 +15,7 @@ const loginUser = async (req: Request, res:Response) => {
             .required(),
     });
 
-    const result: ValidationResult<unknown> = schema.validate(req.body);
+    const result: ValidationResult<object> = schema.validate(req.body);
 
     // If the request body is invalid, return a 400 error
     if (result.error) {
