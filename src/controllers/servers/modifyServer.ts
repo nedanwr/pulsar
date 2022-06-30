@@ -30,7 +30,7 @@ const modifyServer = async (req: Request, res: Response) => {
 
         // Validate request body
         const schema: ObjectSchema<any> = Joi.object({
-            username: Joi.string()
+            name: Joi.string()
                 .min(5)
                 .max(16)
                 .optional(),
