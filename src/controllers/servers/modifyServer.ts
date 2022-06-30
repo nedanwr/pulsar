@@ -72,6 +72,27 @@ const modifyServer = async (req: Request, res: Response) => {
             .finally(async () => {
                 await prisma.$disconnect();
             });
+    // Update server description
+    else if (req.body.description)
+        await prisma.server.update({
+            where: {
+                id: serverId,
+            },
+            data: {
+                description: req.body.description,
+            }
+        })
+            .then((server: Server | null) => {
+                return res.status(200)
+                    .json({
+                        statusCode: 200,
+                        message: "Server name updated",
+                        server,
+                    });
+            })
+            .finally(async () => {
+                await prisma.$disconnect();
+            });
 }
 
 export default modifyServer;
