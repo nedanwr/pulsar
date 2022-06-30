@@ -19,13 +19,12 @@ const createServer = async (req: Request, res: Response) => {
     const result: ValidationResult<unknown> = schema.validate(req.body);
 
     // If the request body is invalid, return a 400 error
-    if (result.error) {
+    if (result.error)
         return res.status(400).json({
             statusCode: 400,
             error: "Bad Request",
             message: result.error.details[0].message,
         });
-    }
 
     // Decode the token
     const token: any = await decodeToken(req);
