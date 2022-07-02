@@ -45,7 +45,10 @@ model Server {
 model Channel {
   id          String    @id @default(uuid())
   name        String
-  description String?
+  type        Int       @default(0)
+  topic       String?
+  position    Int
+  parent_id   String?
   server      Server    @relation(fields: [server_id], references: [id])
   server_id   String
   messages    Message[]
