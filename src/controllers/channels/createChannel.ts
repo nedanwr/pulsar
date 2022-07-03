@@ -85,6 +85,28 @@ const createChannel = async (req: Request, res: Response) => {
                 message: `Parent channel with id "${req.body.parent_id}" does not exist`,
             });
     }
+
+    await prisma.channel.create({
+        data: {
+            name: req.body.name,
+            type: parseInt(req.body.type),
+            topic: req.body.topic,
+            position: parseInt(req.body.position),
+            parent_id: req.body.parent_id,
+            server_id: serverId,
+            createdAt: new Date().getTime(),
+        }
+    })
+        .then((channel: Channel) => {
+            return res.status(201).json({
+                statusCode: 201,
+                message: "Channel created successfully",
+                channel,
+            })
+        })
+        .finally(async () => {
+            await prisma.$disconnect();
+        });
 }
 
 export default createChannel;
