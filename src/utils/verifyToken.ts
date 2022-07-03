@@ -1,9 +1,8 @@
 import { Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@prisma";
 import { jwtSecret } from "@lib/constants";
-
-const prisma: PrismaClient = new PrismaClient();
+import type { User } from "@prisma/client";
 
 export const verifyToken = async (req: any, res: Response, next: NextFunction): Promise<void> => {
     // Get auth header value
@@ -26,7 +25,7 @@ export const verifyToken = async (req: any, res: Response, next: NextFunction): 
             }
 
             // Check if user with id in token exists
-            const userExists = await prisma.user.findUnique({
+            const userExists: User | null = await prisma.user.findUnique({
                 where: {
                     id: decoded!.uid,
                 }
