@@ -59,6 +59,14 @@ const createChannel = async (req: Request, res: Response) => {
             error: "Bad Request",
             message: result.error?.details[0].message,
         });
+
+    // Check if type is either 0 or 1
+    if (parseInt(req.body.type) !== 0 && parseInt(req.body.type) !== 1)
+        return res.status(400).json({
+            statusCode: 400,
+            error: "Bad Request",
+            message: "Channel type must be either 0 or 1",
+        });
 }
 
 export default createChannel;
