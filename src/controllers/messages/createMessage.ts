@@ -1,7 +1,20 @@
 import { Request, Response } from "express";
 import Joi, { ObjectSchema, ValidationResult } from "joi";
+import { channelExists } from "@utils/channelExists";
 
 const createMessage = async (req: Request, res: Response) => {
+    // Get channel id from params
+    const channelId: string = req.params.channel_id;
+
+    // If channel id is not provided, return 400 error
+    if (!channelId)
+        return res.status(400)
+            .json({
+                statusCode: 400,
+                error: "Bad Request",
+                message: "Channel id is required in params"
+            });
+
     // Validate the request body
     const schema: ObjectSchema = Joi.object({
         content: Joi.string()
