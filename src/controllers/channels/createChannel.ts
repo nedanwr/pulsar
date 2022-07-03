@@ -67,6 +67,24 @@ const createChannel = async (req: Request, res: Response) => {
             error: "Bad Request",
             message: "Channel type must be either 0 or 1",
         });
+
+    // If channel type is 0, check if parent_id is provided & exists
+    if (parseInt(req.body.type) === 0 && req.body.parent_id) {
+        // Check if parent id exists in the database
+        const parentExists: Channel | null = await prisma.channel.findFirst({
+            where: {
+                id: req.body.parent_id,
+            }
+        });
+
+        // If the parent id does not exist, return a 400 error
+        if (!parentExists)
+            return res.status(400).json({
+                statusCode: 400,
+                error: "Bad Request",
+                message: `Parent channel with id "${req.body.parent_id}" does not exist`,
+            });
+    }
 }
 
 export default createChannel;
