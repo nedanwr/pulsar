@@ -24,6 +24,41 @@ const createChannel = async (req: Request, res: Response) => {
             error: "Not Found",
             message: `Server with id "${serverId}" not found`
         });
+
+    // Validate the request body
+    const schema: ObjectSchema = Joi.object({
+       name: Joi.string()
+           .min(1)
+           .max(16)
+           .required(),
+
+       type: Joi.number()
+           .integer()
+           .required(),
+
+       topic: Joi.string()
+           .min(0)
+           .max(256)
+           .optional(),
+
+       position: Joi.number()
+           .integer()
+           .required(),
+
+       parent_id: Joi.string()
+           .uuid()
+           .optional(),
+    });
+
+    const result: ValidationResult = schema.validate(req.body);
+
+    // If the request body is invalid, return a 400 error
+    if (result.error)
+        return res.status(400).json({
+            statusCode: 400,
+            error: "Bad Request",
+            message: result.error?.details[0].message,
+        });
 }
 
 export default createChannel;
