@@ -4,7 +4,7 @@ import { prisma } from "@prisma";
 import { jwtSecret } from "@lib/constants";
 import type { User } from "@prisma/client";
 
-export const verifyToken = async (req: any, res: Response, next: NextFunction): Promise<object> => {
+export const verifyToken = async (req: any, res: Response, next: NextFunction): Promise<object | undefined> => {
     // Get auth header value
     const bearerHeader: string | undefined = req.headers["authorization"];
 
@@ -43,11 +43,11 @@ export const verifyToken = async (req: any, res: Response, next: NextFunction): 
             next();
         });
     }
-
-    // If bearer is undefined, return 403
-    return res.status(403).json({
-        statusCode: 403,
-        error: "Forbidden",
-        message: "You are not authorized to access this resource."
-    })
+    else
+        // If bearer is undefined, return 403
+        return res.status(403).json({
+            statusCode: 403,
+            error: "Forbidden",
+            message: "You are not authorized to access this resource."
+        });
 }
