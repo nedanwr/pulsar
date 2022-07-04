@@ -100,6 +100,62 @@
             "default": null
           }
         }
+      },
+      "Channel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The channel's id (automatically generated).",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "description": "The channel's name.",
+            "required": true
+          },
+          "type": {
+            "type": "number",
+            "description": "The channel's type. Must be either 0 (channel) or 1 (category)",
+            "format": "int32",
+            "required": true
+          },
+          "topic": {
+            "type": "string",
+            "description": "The channel's topic.",
+            "required": false
+          },
+          "position": {
+            "type": "number",
+            "description": "The channel's position. Starts from 0.",
+            "format": "int32",
+            "example": 0,
+            "required": true
+          },
+          "parent_id": {
+            "type": "string",
+            "description": "The channel's parent id. Not required if the channel type is 1 (category)",
+            "format": "uuid"
+          },
+          "server_id": {
+            "type": "string",
+            "description": "The server id this channel belongs to.",
+            "format": "uuid",
+            "required": true
+          },
+          "createdAt": {
+            "type": "number",
+            "description": "The unix timestamp of when this channel was created.",
+            "format": "unix",
+            "required": true
+          },
+          "updatedAt": {
+            "type": "number",
+            "description": "The unix timestamp of when this channel was last updated.",
+            "format": "unix",
+            "default": null
+          }
+        }
       }
     }
   },
