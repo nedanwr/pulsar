@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Joi, { ObjectSchema, ValidationResult } from "joi";
+import { serverExists } from "@utils/serverExists";
 
 const deleteServer = async (req: Request, res: Response) => {
     // Validate request params
@@ -18,6 +19,15 @@ const deleteServer = async (req: Request, res: Response) => {
                 statusCode: 400,
                 error: "Bad Request",
                 message: result.error?.details[0].message,
+            });
+
+    // Check if server exists
+    if (!await serverExists(req.params.server_id))
+        return res.status(404)
+            .json({
+                statusCode: 404,
+                error: "Not Found",
+                message: `Server with id ${req.params.server_id} does not exist`,
             });
 }
 
