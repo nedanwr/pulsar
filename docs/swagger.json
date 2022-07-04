@@ -20,24 +20,20 @@
           "id": {
             "type": "string",
             "description": "The user's id",
-            "format": "uuid",
-            "example": "e8251c31-361d-4366-98d3-4865799f3652"
+            "format": "uuid"
           },
           "username": {
             "type": "string",
-            "description": "The user's username, not unique",
-            "example": "Ray"
+            "description": "The user's username, not unique"
           },
           "discriminator": {
             "type": "string",
-            "description": "The user's 4-digit pulsar-tag",
-            "example": "1954"
+            "description": "The user's 4-digit pulsar-tag"
           },
           "email": {
             "type": "string",
             "description": "The user's email",
-            "format": "email",
-            "example": "ray@rayliotta.com"
+            "format": "email"
           },
           "avatar_url": {
             "type": "string",
@@ -52,8 +48,7 @@
           "createdAt": {
             "type": "number",
             "description": "The unix timestamp of when this user was created",
-            "format": "unix",
-            "example": -474595200
+            "format": "unix"
           }
         }
       },
@@ -63,25 +58,19 @@
           "id": {
             "type": "string",
             "description": "The server's id.",
-            "format": "uuid",
-            "example": "901de2f7-99fd-496f-bbab-6026d7a576aa"
+            "format": "uuid"
           },
           "name": {
             "type": "string",
-            "description": "The server's name.",
-            "example": "The Real Goodfellas",
-            "required": true
+            "description": "The server's name."
           },
           "description": {
             "type": "string",
-            "description": "The server's description.",
-            "example": "Server for the original cast of Goodfellas",
-            "required": false
+            "description": "The server's description."
           },
           "owner_id": {
             "type": "string",
-            "description": "ID of the server owner",
-            "example": "e8251c31-361d-4366-98d3-4865799f3652"
+            "description": "ID of the server owner"
           },
           "icon_url": {
             "type": "string",
@@ -90,8 +79,7 @@
           "createdAt": {
             "type": "number",
             "description": "The unix timestamp of when this server was created.",
-            "format": "unix",
-            "example": 653702400
+            "format": "unix"
           },
           "updatedAt": {
             "type": "number",
@@ -111,26 +99,22 @@
           },
           "name": {
             "type": "string",
-            "description": "The channel's name.",
-            "required": true
+            "description": "The channel's name."
           },
           "type": {
             "type": "number",
             "description": "The channel's type. Must be either 0 (channel) or 1 (category)",
-            "format": "int32",
-            "required": true
+            "format": "int32"
           },
           "topic": {
             "type": "string",
-            "description": "The channel's topic.",
-            "required": false
+            "description": "The channel's topic."
           },
           "position": {
             "type": "number",
             "description": "The channel's position. Starts from 0.",
             "format": "int32",
-            "example": 0,
-            "required": true
+            "example": 0
           },
           "parent_id": {
             "type": "string",
@@ -140,20 +124,17 @@
           "server_id": {
             "type": "string",
             "description": "The server id this channel belongs to.",
-            "format": "uuid",
-            "required": true
+            "format": "uuid"
           },
           "createdAt": {
             "type": "number",
             "description": "The unix timestamp of when this channel was created.",
-            "format": "unix",
-            "required": true
+            "format": "unix"
           },
           "updatedAt": {
             "type": "number",
             "description": "The unix timestamp of when this channel was last updated.",
-            "format": "unix",
-            "default": null
+            "format": "unix"
           }
         }
       },
