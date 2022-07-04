@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Joi, { ObjectSchema, ValidationResult } from "joi";
+import { prisma } from "@prisma";
 import { serverExists } from "@utils/serverExists";
 
 const deleteServer = async (req: Request, res: Response) => {
@@ -29,6 +30,22 @@ const deleteServer = async (req: Request, res: Response) => {
                 error: "Not Found",
                 message: `Server with id ${req.params.server_id} does not exist`,
             });
+
+    await prisma.server.delete({
+        where: {
+            id: req.params.server_id,
+        }
+    })
+        .then(() => {
+            return res.status(200)
+                .json({
+                    statusCode: 200,
+                    message: `Server with id ${req.params.server_id} deleted`,
+                });
+        })
+        .finally(async () => {
+            await prisma.$disconnect();
+        });
 }
 
 export default deleteServer;
