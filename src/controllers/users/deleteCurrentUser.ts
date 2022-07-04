@@ -44,7 +44,7 @@ const deleteCurrentUser = async (req: Request, res: Response) => {
             });
 
     // If password is incorrect, return 401 error
-    compare(req.body.password, user.password, (error: Error, isMatch: boolean) => {
+    compare(req.body.password, user.password, async (error: Error, isMatch: boolean) => {
         if (error) throw error;
 
         // If the password doesn't match, return 401 error
@@ -55,6 +55,20 @@ const deleteCurrentUser = async (req: Request, res: Response) => {
                     error: "Unauthorized",
                     message: "Incorrect password",
                 });
+
+        // Delete the user
+        await prisma.user.delete({
+            where: {
+                id: token.uid,
+            }
+        });
+
+        // Return 200 status code
+        return res.status(200)
+            .json({
+                statusCode: 200,
+                message: "User deleted successfully",
+            });
     });
 }
 
