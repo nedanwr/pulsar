@@ -156,6 +156,46 @@
             "default": null
           }
         }
+      },
+      "Message": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The message's id (automatically generated).",
+            "format": "uuid"
+          },
+          "content": {
+            "type": "string",
+            "description": "The message content"
+          },
+          "server_id": {
+            "type": "string",
+            "description": "The server id this message was created in.",
+            "format": "uuid"
+          },
+          "channel_id": {
+            "type": "string",
+            "description": "The channel id this message was created in.",
+            "format": "uuid"
+          },
+          "author_id": {
+            "type": "string",
+            "description": "The user id of the author of this message.",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "number",
+            "description": "The unix timestamp of when this message was created.",
+            "format": "unix"
+          },
+          "updatedAt": {
+            "type": "number",
+            "description": "The unix timestamp of when this message was last updated.",
+            "format": "unix",
+            "default": null
+          }
+        }
       }
     }
   },
