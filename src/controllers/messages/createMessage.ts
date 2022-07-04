@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import Joi, { ObjectSchema, ValidationResult } from "joi";
+import { prisma } from "@prisma";
+import type { Channel, Message } from "@prisma/client";
 import { channelExists } from "@utils/channelExists";
+import { decodeToken } from "@utils/decodeToken";
 
 const createMessage = async (req: Request, res: Response) => {
     // Get channel id from params
@@ -41,6 +44,37 @@ const createMessage = async (req: Request, res: Response) => {
             statusCode: 400,
             error: "Bad Request",
             message: result.error.details[0].message,
+        });
+
+    // Get server id
+    const channel: Channel | null = await prisma.channel.findFirst({
+        where: {
+            id: channelId,
+        }
+    });
+
+    // Get user id from bearer token
+    const token: any = await decodeToken(req);
+
+    await prisma.message.create({
+        data: {
+            content: req.body.content,
+            server_id: channel!.server_id,
+            channel_id: channelId,
+            author_id: token.uid,
+            createdAt: new Date().getTime(),
+        }
+    })
+        .then((message: Message) => {
+            return res.status(201)
+                .json({
+                    statusCode: 201,
+                    message: "Message created",
+                    payload: message,
+                })
+        })
+        .finally(async () => {
+            await prisma.$disconnect();
         });
 }
 
