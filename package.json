@@ -6,7 +6,7 @@
   "main": "build/app.js",
   "scripts": {
     "clean": "rm -rf build && rm -rf node_modules",
-    "start": "cross-env NODE_ENV=production node dist/app.js",
+    "start": "cross-env NODE_ENV=production node build/app.js",
     "dev": "cross-env NODE_ENV=development nodemon src/app.ts",
     "build": "tsc -p tsconfig.json",
     "db-deploy": "yarn prisma migrate deploy --schema src/prisma/schema.prisma",
