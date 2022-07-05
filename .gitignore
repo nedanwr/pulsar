@@ -9,3 +9,6 @@ node_modules
 
 # Firebase
 firebaseServiceAccount.json
+
+# Production Output
+build
